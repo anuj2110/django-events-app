@@ -7,6 +7,16 @@ from .forms import VenueForm,EventForm
 from django.http import HttpResponseRedirect
 # Create your views here.
 
+def delete_venue(request,venue_id):
+    venue = Venue.objects.get(pk=venue_id)
+    venue.delete()
+    return redirect('list-venues')
+
+def delete_event(request,event_id):
+    event = Events.objects.get(pk = event_id)
+    event.delete()
+    return redirect('list-events')
+
 def update_event(request,event_id):
      event = Events.objects.get(pk = event_id)
      form = EventForm(request.POST or None,instance=event)
