@@ -2,12 +2,18 @@ from django.shortcuts import render
 import calendar
 from calendar import HTMLCalendar
 from datetime import datetime
-from .models import Events
+from .models import Events,Venue
 from .forms import VenueForm
 from django.http import HttpResponseRedirect
 # Create your views here.
 
 
+def show_venue(request,venue_id):
+    venue = Venue.objects.get(id = venue_id)
+    return render(request,'events/show-venue.html',{'venue':venue})
+def list_venues(request):
+    venues = Venue.objects.all()
+    return render(request,'events/list-venues.html',{'venues':venues})
 def add_venue(request):
     submitted = False
     if request.method=='POST':

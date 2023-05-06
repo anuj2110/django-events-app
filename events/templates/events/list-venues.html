@@ -1,0 +1,14 @@
+{% extends './base.html' %}
+
+{% block content %}
+
+<table class="table table-hover table-bordered">
+    {% for venue in venues %}
+    <tr>
+        <td>{{venue.name}}</td>
+        <td><a href="{% url 'show-venue' venue.id %}">View</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+{% endblock content %}
+

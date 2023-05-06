@@ -1,0 +1,17 @@
+{% extends './base.html' %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">{{venue.name}}</div>
+    <div class="card-body">
+      <h5 class="card-title">{{venue.address}}</h5>
+      <p class="card-text">
+       <ul>
+        <li>Zip Code: {{venue.zip_code}}</li>
+        <li>Email Address: {{venue.email_address}}</li>
+        <li>Phone:{{venue.phone}}</li>
+       </ul>
+      </p>
+    </div>
+  </div>
+{% endblock content %}
