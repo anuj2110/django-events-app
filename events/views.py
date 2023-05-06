@@ -4,9 +4,18 @@ from calendar import HTMLCalendar
 from datetime import datetime
 from .models import Events,Venue
 from .forms import VenueForm,EventForm
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,HttpResponse
 # Create your views here.
 
+def venue_text_file(request):
+    response = HttpResponse(content_type='text/plain')
+    response['Content-Disposition'] = 'attachment; filename=venues.txt'
+    venues = Venue.objects.all()
+    lines = []
+    for venue in venues:
+        lines.append(f'{venue.name}\n{venue.address}\n{venue.zip_code}\n{venue.phone}\n{venue.web}\n{venue.email_address}\n\n\n')
+    response.writelines(lines)
+    return response
 def delete_venue(request,venue_id):
     venue = Venue.objects.get(pk=venue_id)
     venue.delete()
