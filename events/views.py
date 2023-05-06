@@ -6,6 +6,7 @@ from .models import Events, Venue
 from .forms import VenueForm, EventForm
 from django.http import HttpResponseRedirect, HttpResponse
 import csv
+from django.core.paginator import Paginator
 # Create your views here.
 
 
@@ -94,8 +95,11 @@ def show_venue(request, venue_id):
 
 
 def list_venues(request):
-    venues = Venue.objects.all()
-    return render(request, 'events/list-venues.html', {'venues': venues})
+    p = Paginator(Venue.objects.all(),1)
+    page = request.GET.get('page')
+    venues = p.get_page(page)
+    nums = 'a'*venues.paginator.num_pages
+    return render(request, 'events/list-venues.html', {'venues': venues,'nums':nums})
 
 
 def add_venue(request):

@@ -15,9 +15,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('events.urls'))
+    path('', include('events.urls'))
 ]
+
+admin.site.site_header = 'My Club Administration Page'
+admin.site.site_title = 'Browser Title'
+admin.site.index_title = "Welcome to Admin Area"

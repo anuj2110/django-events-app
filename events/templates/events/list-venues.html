@@ -11,5 +11,37 @@
     </tr>
     {% endfor %}
   </table>
+  <!-- {{venues}} <br></br>
+  next: {{venues.has_next}} <br><br>
+  previous: {{venues.has_previous}} <br><br>
+  num_pages : {{venues.paginator.num_pages}} <br><br>
+  current: {{venues.number}}
+
+  <hr> <br><br> -->
+
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <!-- <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" href="#">Next</a></li> -->
+    
+   {% if venues.has_previous %}
+     <li class="page-item"> <a class="page-link" href="?page=1">&laquo First</a></li>
+      <li class="page-item"><a  class="page-link" href="?page={{venues.previous_page_number}}">Previous</a></li>
+    
+   {% endif %}
+
+ {% for i in nums  %}
+ <li class="page-item "> <a href="?page={{forloop.counter}}" class="page-link">{{forloop.counter}}</a></li>
+ {% endfor %}
+
+   {% if venues.has_next %}
+    <li class="page-item"><a class="page-link" href="?page={{venues.next_page_number}}">Next</a></li>
+    <li class="page-item"><a class="page-link" href="?page={{venues.paginator.num_pages}}">Last &raquo</a></li>
+   {% endif %}
+  </ul>
+</nav>
 {% endblock content %}
 
