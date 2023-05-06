@@ -7,6 +7,14 @@ from .forms import VenueForm,EventForm
 from django.http import HttpResponseRedirect
 # Create your views here.
 
+def update_event(request,event_id):
+     event = Events.objects.get(pk = event_id)
+     form = EventForm(request.POST or None,instance=event)
+     if form.is_valid():
+        form.save()
+        return redirect('list-events')
+     return render(request,'events/update_event.html',{'form':form})
+
 def add_event(request):
     submitted = False
     if request.method=='POST':
