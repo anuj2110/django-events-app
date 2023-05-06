@@ -1,4 +1,4 @@
-{% extends './base.html' %} {% block content %}
+{% extends '../base/base.html' %} {% block content %}
 <h1>Update Event</h1>
 <form action="" method="POST">
   {% csrf_token %} {{form.as_p}}
