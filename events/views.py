@@ -3,9 +3,22 @@ import calendar
 from calendar import HTMLCalendar
 from datetime import datetime
 from .models import Events,Venue
-from .forms import VenueForm
+from .forms import VenueForm,EventForm
 from django.http import HttpResponseRedirect
 # Create your views here.
+
+def add_event(request):
+    submitted = False
+    if request.method=='POST':
+        form = EventForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/add_event?submitted=True')
+    else:
+        form = EventForm()
+        if 'submitted' in request.GET:
+            submitted = True
+    return render(request,'events/add_event.html',{'submitted':submitted,'form':form})
 
 def update_venue(request,venue_id):
     venue = Venue.objects.get(pk = venue_id)
