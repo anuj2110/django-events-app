@@ -7,7 +7,14 @@ from .forms import VenueForm
 from django.http import HttpResponseRedirect
 # Create your views here.
 
-
+def search_venues(request):
+    if request.method=='POST':
+        searched = request.POST['searched']
+        venues = Venue.objects.filter(name__contains=searched)
+        print(venues)
+        return render(request,'events/search-venues.html',{'searched':searched,'venues':venues})
+    else:
+        return render(request,'events/search-venues.html',{})
 def show_venue(request,venue_id):
     venue = Venue.objects.get(id = venue_id)
     return render(request,'events/show-venue.html',{'venue':venue})
